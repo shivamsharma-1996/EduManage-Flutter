@@ -1,4 +1,5 @@
-import 'package:edu_manage/pages/intro_page.dart';
+import 'package:edu_manage/pages/welcome/welcome_page.dart';
+import 'package:edu_manage/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        home: IntroPage());
+        theme: lightMode,
+        home: const WelcomePage());
   }
 }
