@@ -1,8 +1,6 @@
-import 'package:edu_manage/components/button.dart';
 import 'package:edu_manage/components/custom_button.dart';
 import 'package:edu_manage/themes/color_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -17,40 +15,34 @@ class WelcomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                child: Column(
-                  children: [
-                    const Text(
-                      'Option 1',
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 100),
+                  SizedBox(
+                    width: 265,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/educonnect.png",
+                          height: 40,
+                        ),
+                        const SizedBox(height: 14),
+                        const Text(
+                          "Welcome to EduConnect: Bridging the Gap Between Schools, Teachers, and Parents",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xff635C5C),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 100),
-                    Container(
-                      width: 265,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/classpus.png",
-                            height: 40,
-                          ),
-                          const SizedBox(height: 14),
-                          const Text(
-                            "Lorem Ipsum is simply dummy",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Color(0xff635C5C)),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
-              const SizedBox(height: 90),
+              const SizedBox(height: 100),
               CustomButton(
                 text: "Login as Parent",
                 onPressed: () {},
@@ -59,13 +51,14 @@ class WelcomePage extends StatelessWidget {
                 'Login as Staff',
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
+                    fontSize: 14,
                     color: ThemeColor.lightPrimary),
               ),
               const SizedBox(height: 90),
               const Text(
-                'Powered by',
+                'Powered by EduConnect',
                 style: TextStyle(
-                  fontSize: 12,
+                    fontSize: 12,
                     fontWeight: FontWeight.w200,
                     color: ThemeColor.black),
               ),
