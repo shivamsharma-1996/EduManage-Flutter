@@ -1,4 +1,4 @@
-import 'package:edu_manage/pages/welcome_page.dart';
+import 'package:edu_manage/pages/welcome/welcome_page.dart';
 import 'package:edu_manage/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 
