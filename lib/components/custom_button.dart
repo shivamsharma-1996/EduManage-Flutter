@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
+  final Color textColor;
+  final Color btnBackground;
   final VoidCallback onPressed;
 
-  const CustomButton({super.key, required this.text, required this.onPressed});
+  const CustomButton(
+      {super.key,
+      required this.text,
+      this.textColor = Colors.white,
+      required this.onPressed,
+      this.btnBackground = ThemeColor.primary});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,7 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          backgroundColor: MaterialStateProperty.all<Color>(ThemeColor.primary),
+          backgroundColor: MaterialStateProperty.all<Color>(btnBackground),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),
@@ -24,9 +31,10 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: Text(text,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
-              color: Colors.white,
+              color: textColor,
+              fontWeight: FontWeight.bold
             )),
       ),
     );

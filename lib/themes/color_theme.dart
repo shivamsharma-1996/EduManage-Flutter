@@ -10,6 +10,7 @@ class ThemeColor {
   static const Color background = Color(0xffF1F1F1);
   static const Color white = Color(0xffffffff);
   static const Color black = Color(0xff000000);
+  static const Color alphaPrimary = Color(0xffDDDCF3);
   static const Color grey = Color(0xff5F5F5F);
   static const Color darkGrey = Color(0xff2D2D2D);
   static const Color red = Color(0xffE13939);
