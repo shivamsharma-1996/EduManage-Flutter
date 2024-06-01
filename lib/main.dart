@@ -1,4 +1,4 @@
-import 'package:edu_manage/pages/welcome/welcome_page.dart';
+import 'package:edu_manage/pages/login/login_page.dart';
 import 'package:edu_manage/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: lightMode,
-        home: const WelcomePage());
+        home: const LoginPage());
   }
 }
