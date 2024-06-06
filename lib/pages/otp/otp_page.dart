@@ -1,10 +1,23 @@
 import 'package:edu_manage/components/custom_button.dart';
+import 'package:edu_manage/pages/login/login_page.dart';
 import 'package:edu_manage/themes/color_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpPage extends StatelessWidget {
+class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
+
+  @override
+  State<OtpPage> createState() => _OtpPageState();
+}
+
+class _OtpPageState extends State<OtpPage> {
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  String otpPin = "";
+  bool _isButtonEnabled = false;
+   bool _isOtpValid = true;
 
   @override
   Widget build(BuildContext context) {
@@ -80,21 +93,45 @@ class OtpPage extends StatelessWidget {
                     focusedPinTheme: focusedPinTheme,
                     submittedPinTheme: submittedPinTheme,
                     validator: (s) {
-                      return s == '2222' ? null : 'Incorrect OTP';
+                      return _isOtpValid ? null: 'Incorrect OTP';
                     },
                     length: 6,
                     pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                     showCursor: true,
                     onCompleted: (pin) => {
-
+                      otpPin = pin
+                    },
+                    onChanged: (value) => {
+                      setState(() {
+                    _isButtonEnabled = value.length == 6;
+                      })
                     },
                   ),
                   const SizedBox(height: 20),
                   CustomButton(
                     text: "Verify",
-                    textColor: ThemeColor.primary,
-                    btnBackground: ThemeColor.alphaPrimary,
-                    onPressed: () {},
+                    textColor:
+                    _isButtonEnabled ? Colors.white : ThemeColor.primary,
+                    btnBackground: _isButtonEnabled
+                        ? ThemeColor.primary
+                        : ThemeColor.alphaPrimary,
+                    onPressed: _isButtonEnabled ? () async {
+                      try {
+                        // Create a PhoneAuthCredential with the code
+                        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: LoginPage.verify, smsCode: otpPin);
+
+                        // Sign the user in (or link) with the credential
+                        await auth.signInWithCredential(credential);
+                        Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false);
+                      } catch(e) {
+                        setState(() {
+                          _isOtpValid = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Wrong OTP!', style: TextStyle(color: Colors.red),),
+                        ));
+                      }
+                    }  : () {},
                   ),
                 ],
               ),
