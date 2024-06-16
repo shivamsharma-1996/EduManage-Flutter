@@ -4,6 +4,7 @@ import 'package:edu_manage/themes/color_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:android_sms_retriever/android_sms_retriever.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
@@ -13,11 +14,26 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
-
   final FirebaseAuth auth = FirebaseAuth.instance;
   String otpPin = "";
   bool _isButtonEnabled = false;
-   bool _isOtpValid = true;
+  bool _isOtpValid = true;
+  bool consentLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    AndroidSmsRetriever.listenForOneTimeConsent().then((value) {
+      setState(() {
+        if (value != null) {
+          pinController.setText(value);
+        }
+      });
+    });
+  }
+
+  final pinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,21 +105,20 @@ class _OtpPageState extends State<OtpPage> {
                     height: 20,
                   ),
                   Pinput(
+                    controller: pinController,
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: focusedPinTheme,
                     submittedPinTheme: submittedPinTheme,
                     validator: (s) {
-                      return _isOtpValid ? null: 'Incorrect OTP';
+                      return _isOtpValid ? null : 'Incorrect OTP';
                     },
                     length: 6,
                     pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                     showCursor: true,
-                    onCompleted: (pin) => {
-                      otpPin = pin
-                    },
+                    onCompleted: (pin) => {otpPin = pin},
                     onChanged: (value) => {
                       setState(() {
-                    _isButtonEnabled = value.length == 6;
+                        _isButtonEnabled = value.length == 6;
                       })
                     },
                   ),
@@ -111,27 +126,37 @@ class _OtpPageState extends State<OtpPage> {
                   CustomButton(
                     text: "Verify",
                     textColor:
-                    _isButtonEnabled ? Colors.white : ThemeColor.primary,
+                        _isButtonEnabled ? Colors.white : ThemeColor.primary,
                     btnBackground: _isButtonEnabled
                         ? ThemeColor.primary
                         : ThemeColor.alphaPrimary,
-                    onPressed: _isButtonEnabled ? () async {
-                      try {
-                        // Create a PhoneAuthCredential with the code
-                        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: LoginPage.verify, smsCode: otpPin);
+                    onPressed: _isButtonEnabled
+                        ? () async {
+                            try {
+                              // Create a PhoneAuthCredential with the code
+                              PhoneAuthCredential credential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: LoginPage.verify,
+                                      smsCode: otpPin);
 
-                        // Sign the user in (or link) with the credential
-                        await auth.signInWithCredential(credential);
-                        Navigator.pushNamedAndRemoveUntil(context, "home", (route) => false);
-                      } catch(e) {
-                        setState(() {
-                          _isOtpValid = false;
-                        });
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('Wrong OTP!', style: TextStyle(color: Colors.red),),
-                        ));
-                      }
-                    }  : () {},
+                              // Sign the user in (or link) with the credential
+                              await auth.signInWithCredential(credential);
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, "home", (route) => false);
+                            } catch (e) {
+                              setState(() {
+                                _isOtpValid = false;
+                              });
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                  'Wrong OTP!',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ));
+                            }
+                          }
+                        : () {},
                   ),
                 ],
               ),
