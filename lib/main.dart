@@ -1,6 +1,7 @@
 import 'package:edu_manage/pages/home/home_page.dart';
 import 'package:edu_manage/pages/login/login_page.dart';
 import 'package:edu_manage/pages/otp/otp_page.dart';
+import 'package:edu_manage/pages/studentSelection/student_selection_page.dart';
 import 'package:edu_manage/pages/welcome/welcome_page.dart';
 import 'package:edu_manage/themes/light_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
     apiKey: 'AIzaSyATmNQFYS_QMO7HXigrIIAnKPQx6ZNZ7gE',
     appId: 'com.educonnect',
     messagingSenderId: '551745014738',
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         'login': (context) => const LoginPage(),
         'otp': (context) => const OtpPage(),
         'home': (context) => const HomePage(),
+        'studentSelection': (context) => const StudentSelectionPage(),
       },
     );
   }

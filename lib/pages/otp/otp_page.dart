@@ -142,7 +142,7 @@ class _OtpPageState extends State<OtpPage> {
                               // Sign the user in (or link) with the credential
                               await auth.signInWithCredential(credential);
                               Navigator.pushNamedAndRemoveUntil(
-                                  context, "home", (route) => false);
+                                  context, "studentSelection", (route) => false);
                             } catch (e) {
                               setState(() {
                                 _isOtpValid = false;
