@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
-        "lato"
-    ]
+        "lato",
+        "Pinput"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
