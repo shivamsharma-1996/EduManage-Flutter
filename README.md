@@ -1,16 +1,41 @@
-# edu_manage
+# 🎓 EduManage – Flutter UI Project
 
-A new Flutter project.
+A **Flutter** project designed to explore UI development by building a student management app. 
+---
 
-## Getting Started
+## 📱 Screenshots
 
-This project is a starting point for a Flutter application.
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="screenshots/welcome.jpg" width="200" height="450" alt="Welcome Screen"/></td>
+      <td><img src="screenshots/phone.jpg" width="200" height="450" alt="Phone Input Screen"/></td>
+      <td><img src="screenshots/otp.jpg" width="200" height="450" alt="OTP Screen"/></td>
+    </tr>
+    <tr>
+      <td><img src="screenshots/student.jpg" width="200" height="450" alt="Student Selection Screen"/></td>
+      <td><img src="screenshots/dashboard.jpg" width="200" height="450" alt="Dashboard Screen"/></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Getting Started
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Prerequisites
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.10 or newer)
+- Android Studio or Xcode (with emulator or real device setup)
+- Dart (bundled with Flutter)
+- IDE (VS Code or Android Studio recommended)
+
+---
+
+### Installation
+
+```bash
+git clone https://github.com/shivamsharma-1996/EduManage-Flutter.git
+cd EduManage-Flutter
+flutter pub get
